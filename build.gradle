@@ -49,10 +49,10 @@ repositories {
 }
 
 dependencies {
-    // Source: https://mvnrepository.com/artifact/tools.jackson.core/jackson-databind
-    implementation("tools.jackson.core:jackson-databind:3.2.3")
-    implementation("com.fasterxml.jackson.core:jackson-databind:3.2.3")
-
+    // Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.22.3")
+    // Source: https://mvnrepository.com/artifact/org.snmp4j/snmp4j
+    implementation("org.snmp4j:snmp4j:3.13.1")
 }
 
 test {

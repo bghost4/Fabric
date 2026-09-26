@@ -28,14 +28,24 @@ public class Device implements DeviceTreeData {
     private final UUID deviceUUID = UUID.randomUUID();
 
     public Device(String address,String community,String name) {
-        t = new CommunityTarget<>();
+        this(name, defaultTarget(address,community));
+    }
+
+    /** Restores a device from a previously configured target, e.g. when loading from a saved config. */
+    public Device(String friendlyName, CommunityTarget<Address> target) {
+        this.t = target;
+        this.friendlyName = friendlyName;
+        this.name.bind(Bindings.format("%s (%s)",sysName,friendlyName));
+    }
+
+    private static CommunityTarget<Address> defaultTarget(String address, String community) {
+        CommunityTarget<Address> t = new CommunityTarget<>();
         t.setCommunity(new OctetString(community));
         t.setAddress(GenericAddress.parse(address));
         t.setRetries(2);
         t.setTimeout(1500);
         t.setVersion(SnmpConstants.version2c);
-        this.friendlyName = name;
-        this.name.bind(Bindings.format("%s (%s)",sysName,friendlyName));
+        return t;
     }
 
     public List<Interface> getInterfaces() { return allInterfaces; }
@@ -91,7 +101,7 @@ public class Device implements DeviceTreeData {
 
         //HashMap<Interface,List<Endpoint>> data = new HashMap<>();
 
-        if( events == null || events.size() == 0) {
+        if( events == null || events.isEmpty()) {
             System.err.println("Empty Events table");
            // return Collections.emptyList();
         } else {
@@ -248,6 +258,8 @@ public class Device implements DeviceTreeData {
     }
 
     public CommunityTarget<?> getTarget() { return t; }
+
+    public String getFriendlyName() { return friendlyName; }
 
     public String getInterfaceName(Integer ifIndex) {
         return allInterfaces.stream().filter(iface -> iface.getIndex() == ifIndex).findFirst().map(iface -> iface.getName()).orElse("NONE");

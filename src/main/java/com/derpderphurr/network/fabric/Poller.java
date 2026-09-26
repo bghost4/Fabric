@@ -26,6 +26,8 @@ public class Poller {
         snmp = new Snmp(transport);
         snmp.listen();
 
+        System.out.println("Background Poller Started");
+
         Thread pollingThread = new Thread(() -> {
             while(true) {
                 long current = System.currentTimeMillis();
