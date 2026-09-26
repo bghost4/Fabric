@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.beryx.runtime' version '1.12.4'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
+java {
+    modularity.inferModulePath = true
+}
+
+group 'com.derpderphurr'
+version '0.1.1'
+
+targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_17
+
+mainClassName = "com.derpderphurr.network.fabric.ui.Launcher"
+
+runtime {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages','--bind-services']
+    modules = [
+            'java.desktop',
+            'java.xml',
+            'java.logging',
+            'java.sql',
+            'java.naming',
+            'java.compiler',
+            'java.scripting',
+            'java.management',
+            'java.datatransfer',
+            'java.security.sasl',
+            'jdk.unsupported',
+            'jdk.jfr']
+}
+
+javafx {
+    modules = [ 'javafx.controls','javafx.swing', 'javafx.fxml' ]
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.snmp4j/snmp4j
+    implementation group: 'org.snmp4j', name: 'snmp4j', version: '3.4.5'
+
+}
+
+test {
+    useJUnitPlatform()
+}
