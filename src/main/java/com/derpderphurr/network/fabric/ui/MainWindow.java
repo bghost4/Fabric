@@ -4,9 +4,11 @@ import com.derpderphurr.network.fabric.Device;
 import com.derpderphurr.network.fabric.Endpoint;
 import com.derpderphurr.network.fabric.Interface;
 import com.derpderphurr.network.fabric.LLDPNeighbor;
+import com.derpderphurr.network.fabric.config.Config;
 import com.derpderphurr.network.fabric.datastore.InMemoryDataStore;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -39,6 +41,13 @@ public class MainWindow extends VBox {
     private final InMemoryDataStore dataStore = new InMemoryDataStore();
     private UIPoller poller;
     private final TreeItem<DeviceTreeData> root = new TreeItem<>(null);
+
+    private SimpleObjectProperty<Config> config = new SimpleObjectProperty<>(new Config());
+
+    @FXML
+    private void onLoadConfig(ActionEvent e) {}
+
+    @FXML private void onSaveConfig(ActionEvent e) { }
 
     private TreeItem<DeviceTreeData> filterTree(String name) {
         if(name == null || name.isEmpty() || name.isBlank() ) { return root; }

@@ -49,8 +49,9 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.snmp4j/snmp4j
-    implementation group: 'org.snmp4j', name: 'snmp4j', version: '3.4.5'
+    // Source: https://mvnrepository.com/artifact/tools.jackson.core/jackson-databind
+    implementation("tools.jackson.core:jackson-databind:3.2.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:3.2.3")
 
 }
 

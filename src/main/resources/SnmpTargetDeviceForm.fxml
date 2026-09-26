@@ -28,10 +28,10 @@
             <Label text="Address" GridPane.rowIndex="1" />
             <Label text="Port" GridPane.rowIndex="2" />
             <Label text="Community" GridPane.rowIndex="3" />
-            <TextField prefHeight="23.0" prefWidth="319.0" GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField prefHeight="23.0" prefWidth="319.0" GridPane.columnIndex="1" fx:id="txtName"/>
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtAddress"/>
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtPort"/>
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtCommunity"/>
          </children>
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" />

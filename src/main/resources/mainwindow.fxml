@@ -17,14 +17,17 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-                  <MenuItem mnemonicParsing="false" onAction="#onAddDevice" text="Add Switch" />
-                  <MenuItem mnemonicParsing="false" onAction="#onDumpEndpoints" text="Dump Endpoints to CSV" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+              <MenuItem mnemonicParsing="false" onAction="#onLoadConfig" text="Load Config" />
+              <MenuItem mnemonicParsing="false" onAction="#onSaveConfig" text="Save Config" />
+              <MenuItem mnemonicParsing="false" onAction="#onAddDevice" text="Add Switch" />
+              <MenuItem mnemonicParsing="false" onAction="#onDumpEndpoints" text="Dump Endpoints to CSV" />
+            <MenuItem mnemonicParsing="false" onAction="#onQuit" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
                <items>
                   <CheckMenuItem mnemonicParsing="false" text="Hide Down Interfaces" />
+                  <CheckMenuItem mnemonicParsing="false" text="Hide Non Trunk Interfaces" />
                </items></Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
