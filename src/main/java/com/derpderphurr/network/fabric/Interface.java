@@ -25,7 +25,7 @@ public class Interface implements DeviceTreeData {
 
     public List<LLDPNeighbor> getLLDPNeighbors() { return myNeighbors; }
 
-    public static enum Mode {
+    public enum Mode {
         /** Untagged member of a single VLAN, no tagged VLANs. */
         ACCESS,
         /** Tagged member of one or more VLANs (may also carry an untagged native VLAN). */
@@ -100,7 +100,6 @@ public class Interface implements DeviceTreeData {
         } else if(vb.getOid().startsWith(InterfaceData.ifPhysAddress)) {
             setIFaceMac(vb.getVariable().toString());
         }
-        else { }
     }
 
     public void clearEndpoints() { myEndpoints.clear(); }

@@ -44,7 +44,7 @@ public class MainWindow extends VBox {
         private UIPoller poller;
         private final TreeItem<DeviceTreeData> root = new TreeItem<>(null);
 
-        private SimpleObjectProperty<Config> config = new SimpleObjectProperty<>(new Config());
+        private final SimpleObjectProperty<Config> config = new SimpleObjectProperty<>(new Config());
         private Path configPath;
 
         @FXML
@@ -82,7 +82,7 @@ public class MainWindow extends VBox {
         }
 
         private TreeItem<DeviceTreeData> filterTree(String name) {
-            if(name == null || name.isEmpty() || name.isBlank() ) { return root; }
+            if(name == null || name.isBlank()) { return root; }
             TreeItem<DeviceTreeData> newRoot = new TreeItem<>(new DummyTreeData("ROOT"));
 
             List<DeviceTreeData> matches = flatten(root).filter(dtd -> dtd.getName().toLowerCase().replace(":","").contains(name.toLowerCase().replace(":","").replace("-",""))).toList();
@@ -176,9 +176,7 @@ public class MainWindow extends VBox {
                 dragEvent.consume();
             });
 
-            lstMonitor.widthProperty().addListener((ob,ov,nv) -> {
-                System.out.println("List width: "+nv);
-            });
+            lstMonitor.widthProperty().addListener((ob,ov,nv) -> System.out.println("List width: "+nv));
 
             lstMonitor.setOnDragDropped(dragEvent -> {
                 Object objInterface = dragEvent.getDragboard().getContent(Interface.DATAFORMAT);
@@ -195,7 +193,7 @@ public class MainWindow extends VBox {
                     TextInputDialog tid = new TextInputDialog(item.getValue().toString());
                     tid.setTitle(String.format("Rename %s",item.getValue().toString()));
                     tid.showAndWait().ifPresent(newname -> item.getValue().nameProperty().set(newname));
-                    tvDevices.fireEvent(new TreeItem.TreeModificationEvent<DeviceTreeData>(TreeItem.valueChangedEvent(),item,item.getValue()));
+                    tvDevices.fireEvent(new TreeItem.TreeModificationEvent<>(TreeItem.valueChangedEvent(),item,item.getValue()));
                 }
             });
 
@@ -285,9 +283,7 @@ public class MainWindow extends VBox {
 
         private void scanDevice(TreeItem<DeviceTreeData> item) {
             if(item.getValue() instanceof Device device && item.getChildren().isEmpty() ) {
-                poller.getInterfaces(device,() -> {
-                    createDeviceTreeNode(item,device);
-                });
+                poller.getInterfaces(device,() -> createDeviceTreeNode(item,device));
             }
         }
 

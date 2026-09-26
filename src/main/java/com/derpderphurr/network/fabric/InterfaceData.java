@@ -20,7 +20,7 @@ public class InterfaceData {
     private final long captureTimestamp;
     private PortStatus operStatus,adminStatus;
 
-    enum PortStatus {
+    public enum PortStatus {
         UP(1),DOWN(2),TESTING(3),UNKNOWN(4),DORMANT(5),NOT_PRESENT(6),LOWER_LAYER_DOWN(7);
 
         private final int innerStatus;

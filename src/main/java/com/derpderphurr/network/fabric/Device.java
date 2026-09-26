@@ -139,7 +139,7 @@ public class Device implements DeviceTreeData {
                                     iface.getEndpoints().add(ep);
                                     },() -> System.err.printf("No Interface at Index (%s) for Device: \"%s\"",interfaceIndex,t.toString()));
 
-                    } else { continue; }
+                    }
                 }
             }
         }
@@ -236,10 +236,10 @@ public class Device implements DeviceTreeData {
         long methodBegin = System.currentTimeMillis();
         Map<Integer,InterfaceData> interfaceDataMap = new HashMap<>();
         PDU pdu = new PDU();
-        pdu.addAll(getMonitorOID().stream().map(oid -> new VariableBinding(oid)).collect(Collectors.toList()));
+        pdu.addAll(getMonitorOID().stream().map(VariableBinding::new).collect(Collectors.toList()));
         pdu.setType(PDU.GET);
         try {
-            ResponseEvent re = snmp.get(pdu,t);
+            ResponseEvent<Address> re = snmp.get(pdu,t);
             if(re.getResponse() == null || re.getResponse().getVariableBindings() == null) {
                 System.err.println("Respose was Null");
             }
@@ -262,6 +262,6 @@ public class Device implements DeviceTreeData {
     public String getFriendlyName() { return friendlyName; }
 
     public String getInterfaceName(Integer ifIndex) {
-        return allInterfaces.stream().filter(iface -> iface.getIndex() == ifIndex).findFirst().map(iface -> iface.getName()).orElse("NONE");
+        return allInterfaces.stream().filter(iface -> iface.getIndex() == ifIndex).findFirst().map(Interface::getName).orElse("NONE");
     }
 }

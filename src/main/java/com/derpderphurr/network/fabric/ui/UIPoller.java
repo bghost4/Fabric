@@ -11,9 +11,7 @@ public class UIPoller extends Poller {
     private final Map<Interface,InterfaceMonitor> monitorMap = new HashMap<>();
 
     public UIPoller() {
-        this.dataConsumer = (interfaceData -> {
-            interfaceData.getDevice().getInterface(interfaceData.getIndex()).ifPresent(iface -> monitorMap.get(iface).addData(interfaceData));
-        });
+        this.dataConsumer = (interfaceData -> interfaceData.getDevice().getInterface(interfaceData.getIndex()).ifPresent(iface -> monitorMap.get(iface).addData(interfaceData)));
     }
 
     @Override

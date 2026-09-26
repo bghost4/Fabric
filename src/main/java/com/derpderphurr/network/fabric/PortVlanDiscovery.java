@@ -15,15 +15,12 @@ import java.util.*;
 /**
  * Stateless, thread-safe detection of trunk vs access ports and their VLANs using only
  * standard MIBs: BRIDGE-MIB (RFC 4188) and Q-BRIDGE-MIB (RFC 4363).
- *
  * A port is treated as a trunk if it is a TAGGED member of at least one VLAN
  * (egress member but not untagged). Otherwise it is an access port and its
  * access VLAN is its PVID (the VLAN untagged ingress frames are assigned to).
- *
  * Results are keyed by ifIndex so they can be joined with existing interface data.
  * Interfaces that are not bridge ports (routed ports, loopbacks, SVIs, LAG members
  * whose LAG is the bridge port) are simply absent from the result.
- *
  * Written against SNMP4J 3.x (generic Target). For 2.x, drop the generics.
  */
 public final class PortVlanDiscovery {
