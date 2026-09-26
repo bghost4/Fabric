@@ -46,6 +46,7 @@ public class MainWindow extends VBox {
 
         private SimpleObjectProperty<Config> config = new SimpleObjectProperty<>(new Config());
         private Path configPath;
+
         @FXML
         private void onLoadConfig(ActionEvent e) {
             FileChooser fc = new FileChooser();
@@ -53,6 +54,7 @@ public class MainWindow extends VBox {
             if(fconfg != null) {
                 try {
                     Config nconfig = Config.load(fconfg.toPath(),"");
+                    root.getChildren().clear();
                     this.config.set(nconfig);
                     configPath = fconfg.toPath();
                     this.config.get().getDevices().forEach(this::addDeviceToTree);
