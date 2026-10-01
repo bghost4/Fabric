@@ -1,7 +1,4 @@
 /.gradle/
 /.idea/
 build/
-gradle/
-gradlew
-gradlew.bat
-/hs_err_pid31530.log
+hs_err_pid*.log
