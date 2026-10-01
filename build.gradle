@@ -1,8 +1,8 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'org.beryx.runtime' version '1.12.4'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.beryx.runtime' version '2.0.1'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 idea {
@@ -15,13 +15,12 @@ java {
     modularity.inferModulePath = true
 }
 
-group 'com.derpderphurr'
-version '0.1.1'
+group = 'com.derpderphurr'
+version = '0.1.1'
 
-targetCompatibility = JavaVersion.VERSION_17
-sourceCompatibility = JavaVersion.VERSION_17
-
-mainClassName = "com.derpderphurr.network.fabric.ui.Launcher"
+application {
+    mainClass = "com.derpderphurr.network.fabric.ui.Launcher"
+}
 
 runtime {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages','--bind-services']
