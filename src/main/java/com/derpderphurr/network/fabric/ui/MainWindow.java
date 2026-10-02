@@ -37,6 +37,11 @@ public class MainWindow extends VBox {
         @FXML
         private TextField txtFilterMac;
 
+        @FXML
+        private Tab mapTab;
+
+        private final VisualNetworkMap map = new VisualNetworkMap();
+
         private final SimpleBooleanProperty hideDownInterfaces = new SimpleBooleanProperty(false);
         private final SimpleBooleanProperty hidNonTrunkInerface = new SimpleBooleanProperty(false);
 
@@ -122,6 +127,8 @@ public class MainWindow extends VBox {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mainwindow.fxml"));
             loader.setRoot(this);
             loader.setController(this);
+
+
 
             try {
                 loader.load();
@@ -231,6 +238,8 @@ public class MainWindow extends VBox {
                 tvDevices.setRoot(nr);
             });
 
+            mapTab.setContent(map);
+
         }
 
         @FXML
@@ -291,7 +300,10 @@ public class MainWindow extends VBox {
         private void onScanAllDevices(ActionEvent e) {
             //Scan all Device Nodes
 
+            //TODO make this a task
             root.getChildren().stream().filter(dtn -> dtn.getValue() instanceof Device).forEach(this::scanDevice);
+
+            map.renderConfig(this.config.get());
 
         }
 
