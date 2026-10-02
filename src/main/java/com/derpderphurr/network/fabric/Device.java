@@ -27,7 +27,23 @@ public class Device implements DeviceTreeData {
     private final List<Interface> monitoredInterfaces = new ArrayList<>();
     private final UUID deviceUUID = UUID.randomUUID();
 
-    public Device(String address,String community,String name) {
+    public String getSysName() {
+        return sysName.get();
+    }
+
+    public List<String> getNeighbors() {
+        return allInterfaces.stream().flatMap(i -> i.getLLDPNeighbors().stream().map(LLDPNeighbor::systemName)).toList();
+    }
+
+    public SimpleStringProperty sysNameProperty() {
+        return sysName;
+    }
+
+    public void setSysName(String sysName) {
+        this.sysName.set(sysName);
+    }
+
+    public Device(String address, String community, String name) {
         this(name, defaultTarget(address,community));
     }
 
